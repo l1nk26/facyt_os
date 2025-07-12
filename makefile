@@ -31,7 +31,7 @@ object/%.o: src/%.asm
 	$(ASM) $(ASMFLAGS) $< -o $@
 
 clean:
-	rm -rf object $(TARGET)
+	rm -rf object/* $(TARGET)
 	rm -rf iso my_os.iso
 
 iso: $(TARGET)
@@ -41,9 +41,9 @@ iso: $(TARGET)
 	grub-mkrescue -o my_os.iso iso/
 
 run: my_os.iso
-	qemu-system-i386 -cdrom my_os.iso
+	qemu-system-x86_64 -cdrom my_os.iso 
 
 run-debug: my_os.iso
-	qemu-system-i386 -cdrom my_os.iso -s -S
+	qemu-system-x86_64 -cdrom my_os.iso -s -S 
 
 .PHONY: all clean iso
